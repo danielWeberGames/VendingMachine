@@ -21,6 +21,7 @@ namespace VendingMachine01
             Console.ReadKey();
         }
 
+
         static void DrawAsciiArt()
         {
             Console.WriteLine("Vending Machine");
