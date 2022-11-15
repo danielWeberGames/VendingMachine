@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace VendingMachine01
 { 
+
+    class Globals
+    {
+        public static float price;
+    }
     class Program
     {
         static void Main(string[] args)
         {
             DrawAsciiArt();
 
-            float price = 2.50f;
-            Console.WriteLine("A soda cost $" + price.ToString("N2"));
-            Console.WriteLine("Please enter money");
+            ChooseMenu();
 
-            TakeInMoney(price);
+            TakeInMoney();
             
             Console.ReadKey();
         }
@@ -28,7 +31,7 @@ namespace VendingMachine01
             Console.WriteLine(" ______________");
             Console.WriteLine("|..............|");
             Console.WriteLine("|..............|");
-            Console.WriteLine("|.....SODA.....|");
+            Console.WriteLine("|..............|");
             Console.WriteLine("|..............|");
             Console.WriteLine("|..............|");
             Console.WriteLine("|..............|");
@@ -39,21 +42,51 @@ namespace VendingMachine01
             Console.WriteLine("");
         }
 
-        static void TakeInMoney(float price)
+        static void ChooseMenu()
         {
+            float sodePrice = 2.50f;
+            float chipsPrice = 1.25f;
+
+            Console.WriteLine("Soda : " + sodePrice.ToString("N2") + ", Chips : " + chipsPrice.ToString("N2"));
+            Console.WriteLine("Please pick a snack");
+
+            string selection = Console.ReadLine();
+            switch (selection)
+            {
+                case "soda":
+                    Globals.price = sodePrice;
+                    Console.WriteLine("a soda cost " + sodePrice.ToString("N2"));
+                    break;
+
+                case "chips":
+                    Globals.price = chipsPrice;
+                    Console.WriteLine("a bag of chips cost " + chipsPrice.ToString("N2"));
+                    break;
+
+                default:
+                    Console.WriteLine("Please enter a valid selection");
+                    break;
+            }
+
+
+
+        }
+        static void TakeInMoney()
+        {
+            Console.WriteLine("Please enter money");
             float inputAmount = 0;
 
-            while (inputAmount < price)
+            while (inputAmount < Globals.price)
             {
                 inputAmount = float.Parse(Console.ReadLine());
-                if (inputAmount > price)
+                if (inputAmount > Globals.price)
                 {
                     break;
                 }
                 Console.WriteLine("not enough, please enter a new amount");
             }
 
-            float change = inputAmount - price;
+            float change = inputAmount - Globals.price;
 
             ReturnChange(change);
 
