@@ -46,11 +46,12 @@ namespace VendingMachine01
         {
             float sodePrice = 2.50f;
             float chipsPrice = 1.25f;
+            float fruitPrice = 0.50f;
 
-            Console.WriteLine("Soda : " + sodePrice.ToString("N2") + ", Chips : " + chipsPrice.ToString("N2"));
+            Console.WriteLine("Soda : " + sodePrice.ToString("N2") + ", Chips : " + chipsPrice.ToString("N2") + ", Fruit : " + fruitPrice.ToString("N2"));
             Console.WriteLine("Please pick a snack");
 
-            string selection = Console.ReadLine();
+            string selection = Console.ReadLine().ToLower();
             switch (selection)
             {
                 case "soda":
@@ -63,13 +64,14 @@ namespace VendingMachine01
                     Console.WriteLine("a bag of chips cost " + chipsPrice.ToString("N2"));
                     break;
 
+                case "fruit":
+                    Globals.price = fruitPrice;
+                    Console.WriteLine("a piece of fruit cost " + fruitPrice.ToString("N2"));
+                    break;
                 default:
-                    Console.WriteLine("Please enter a valid selection");
+                    Console.WriteLine("invalid selection");
                     break;
             }
-
-
-
         }
         static void TakeInMoney()
         {
